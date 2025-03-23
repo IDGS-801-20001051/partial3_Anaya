@@ -1,0 +1,211 @@
+/* styles.css */
+
+body {
+    font-family: sans-serif;
+  }
+  
+  .container {
+    width: 95%; /* Slightly wider container */
+    max-width: 1200px; /* Increased max width */
+    margin: 20px auto;
+  }
+  
+  .form-section {
+    background-color: #ccebff; /* Light Blue */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .form-section h2,
+  .form-section h3 {
+    color: #333; /* Darker text for better readability */
+  }
+  
+  .form-row {
+    display: flex;
+    gap: 20px; /* Space between form fields in the same row */
+    margin-bottom: 15px;
+  }
+  
+  .form-group {
+    flex: 1; /* Distribute available space equally */
+    margin-bottom: 0; /* Remove default margin */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="tel"],
+  input[type="number"],
+  select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important to include padding in width */
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 10px;
+    /* Add the following line to set the background color */
+    background-color: #ccebff; /* Light Blue - same as form-section */
+    padding: 5px; /* Add some padding for better appearance */
+    border-radius: 4px; /* Match the border radius of other form elements */
+  }
+  
+  .radio-group label {
+    font-weight: normal; /* Resetting font-weight for radio labels */
+  }
+  
+  /* Style for the radio button itself (optional, for more consistent look) */
+  .radio-group input[type="radio"] {
+    /* Remove default appearance for better control */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  
+    /* Create a custom radio button */
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    border-radius: 50%; /* Make it round */
+    outline: none;
+    cursor: pointer;
+    background-color: white; /* Default background color */
+  
+    /* Add a checkmark effect when checked */
+    &:checked {
+      background-color: #007bff; /* Primary color when checked */
+      border: 1px solid #007bff;
+    }
+  
+    /* Create the inner circle for the checked state */
+    &:checked::before {
+      content: "";
+      display: block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: white;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .table-container {
+    background-color: #f0f8ff; /* Lighter blueish */
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Sales Card Styling */
+  .sales-card {
+    background-color: #e6f7ff; /* Lightest blue */
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .sales-card h5 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .sales-card .btn-info {
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* Make button full width */
+  }
+  
+  .sales-card .btn-info:hover {
+    background-color: #138496;
+  }
+  
+  /* Total Sales Styling */
+  .total-sales {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #28a745; /* Green for positive sales */
+  }
+  
+  /* Row for table and card */
+  .table-card-row {
+    display: flex;
+    gap: 20px; /* Space between table and card */
+  }
+  
+  .table-col {
+    flex: 2; /* Table takes up more space */
+  }
+  
+  .card-col {
+    flex: 1; /* Card takes up less space */
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px; /* Add some space above the buttons */
+  }
+
+  .sales-list p {
+    margin-bottom: 5px; /* Espacio entre cada venta */
+    font-size: 16px;      /* Tamaño de fuente */
+  }

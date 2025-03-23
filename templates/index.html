@@ -1,0 +1,144 @@
+{% extends "base.html" %} {% import "_macros.html" as macros %} {% block content
+%}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/styles.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+
+<div class="container">
+  <div class="text-end mt-3">
+    <a href="{{ url_for('logout') }}" class="btn btn-danger">
+      <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+    </a>
+  </div>
+  <div class="card p-4 shadow-lg rounded" style="background-color: #d0e8ff">
+    <h2 class="text-center text-primary mb-4">Pizzeria</h2>
+    <form method="POST">
+      {{ form.hidden_tag() }}
+
+      <div class="row">
+        <div class="col-md-4">{{ macros.render_field(form.nombre) }}</div>
+        <div class="col-md-4">{{ macros.render_field(form.direccion) }}</div>
+        <div class="col-md-4">{{ macros.render_field(form.telefono) }}</div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-4">{{ macros.render_field(form.tamaño_pizza) }}</div>
+        <div class="col-md-4">{{ macros.render_field(form.ingredientes) }}</div>
+        <div class="col-md-4">
+          {{ macros.render_field(form.numero_pizzas) }}
+        </div>
+        <div class="col-12 text-center mt-2">
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-cart-plus"></i> {{ form.submit.label }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card shadow p-3" style="background-color: #d0e8ff">
+        <h3 class="text-center text-secondary">Pedidos</h3>
+        <table class="table table-bordered mt-2">
+          <thead>
+            <tr>
+              <th>Tamaño</th>
+              <th>Ingredientes</th>
+              <th>Cantidad</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for pedido in pedidos %}
+            <tr>
+              <td>{{ pedido.tamaño }}</td>
+              <td>{{ ', '.join(pedido.ingredientes) }}</td>
+              <td>{{ pedido.cantidad }}</td>
+              <td>${{ pedido.subtotal }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% if total_pedido > 0 %}
+        <h4 class="text-end text-success">Total: ${{ total_pedido }}</h4>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow p-3" style="background-color: #d0e8ff">
+        <h3 class="text-center text-secondary">Ventas</h3>
+        {% if ventas %}
+        <ul class="list-group">
+          {% for venta in ventas %}
+          <li class="list-group-item d-flex justify-content-between">
+            <b>{{ venta.nombre }}</b>
+            <span class="text-success">${{ venta.total_pedido }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        <h4 class="text-end mt-2 text-primary">
+          Total Ventas: ${{ total_ventas }}
+        </h4>
+        {% else %}
+        <p class="text-center text-muted">No existen ventas.</p>
+        {% endif %}
+
+        <form method="POST" class="mt-3 text-center">
+          {{ form.hidden_tag() }}
+          <label for="fecha">Día:</label>
+          <input
+            type="date"
+            id="fecha"
+            name="fecha"
+            value="{{ fecha }}"
+            required
+            class="form-control w-50 mx-auto"
+          />
+          <button type="submit" class="btn btn-info mt-2">
+            <i class="fa-solid fa-chart-line"></i> Mostrar Ventas
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <form
+      action="{{ url_for('quitar_pedido') }}"
+      method="POST"
+      class="d-inline"
+    >
+      {{ form.hidden_tag() }}
+      <input type="hidden" name="nombre" value="{{ nombre_cliente }}" />
+      <input type="hidden" name="direccion" value="{{ direccion_cliente }}" />
+      <input type="hidden" name="telefono" value="{{ telefono_cliente }}" />
+      <button type="submit" class="btn btn-danger me-2">
+        <i class="fa-solid fa-trash"></i> Quitar Pedido
+      </button>
+    </form>
+
+    <form
+      action="{{ url_for('terminar_pedido', nombre=nombre_cliente, direccion=direccion_cliente, telefono=telefono_cliente) }}"
+      method="POST"
+      class="d-inline"
+    >
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <button type="submit" class="btn btn-success">
+        <i class="fa-solid fa-check"></i> Terminar Pedido
+      </button>
+    </form>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %} {% if
+  messages %} {% for category, message in messages %}
+  <div class="alert alert-{{ category }} text-center mt-3">{{ message }}</div>
+  {% endfor %} {% endif %} {% endwith %}
+</div>
+{% endblock %}
