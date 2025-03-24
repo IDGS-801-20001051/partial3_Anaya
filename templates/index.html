@@ -2,7 +2,7 @@
 %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/styles.css') }}"
+  href="{{ url_for('static', filename='css/output.css') }}"
 />
 <link
   rel="stylesheet"
@@ -10,11 +10,6 @@
 />
 
 <div class="container">
-  <div class="text-end mt-3">
-    <a href="{{ url_for('logout') }}" class="btn btn-danger">
-      <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-    </a>
-  </div>
   <div class="card p-4 shadow-lg rounded" style="background-color: #d0e8ff">
     <h2 class="text-center text-primary mb-4">Pizzeria</h2>
     <form method="POST">

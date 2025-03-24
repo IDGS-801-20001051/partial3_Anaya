@@ -8,10 +8,12 @@ import os
 import datetime
 from sqlalchemy import func
 
+
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
 csrf = CSRFProtect()
 app.config['WTF_CSRF_ENABLED'] = True
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -212,16 +214,11 @@ def login():
     return render_template('login.html', form=form)
 
 
-@app.route('/alumnos')
-@login_required
-def alumnos():
-    return render_template('alumnos.html')
 
-
-@app.route('/maestros')
+@app.route('/proveedores')
 @login_required
-def maestros():
-    return render_template('maestros.html')
+def proveedores():
+    return render_template('proveedores.html')
 
 
 
